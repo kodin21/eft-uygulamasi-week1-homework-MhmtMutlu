@@ -22,7 +22,7 @@ let inputReceiverDOM = document.querySelector(".receiver-account")
 let sendButtonDOM = document.querySelector(".send-button")
 let timerCountdownDOM = document.querySelector(".timer-countdown")
 
-accounts.forEach((acc, index) => accountsDOM.innerHTML += `
+accounts.forEach((acc, index) => {accountsDOM.innerHTML += `
     <div id=${index} class="card">
         <h2>Account</h2>
         <p>${acc.iban}</p>
@@ -30,14 +30,17 @@ accounts.forEach((acc, index) => accountsDOM.innerHTML += `
         <p>${acc.balance} $</p>
         <button id=${index} class="select-buttons">Select</button>
     </div>
-`)
+`})
 
 window.onload = function() {
-    var minute = 01;
+    var minute = 1;
     var sec = 59;
     setInterval(function() {
-        timerCountdownDOM.innerHTML = minute + " : " + sec;
+        timerCountdownDOM.innerHTML = "0" + minute + " : " + sec;
         sec--;
+        if (sec < 10) {
+            sec = "0" + sec
+        }
         if (sec == 0) {
             if (minute == 0 && sec == 0) {
                 window.location.reload()

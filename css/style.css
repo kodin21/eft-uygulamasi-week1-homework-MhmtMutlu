@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -40,7 +44,7 @@ body {
 }
 
 .accounts div {
-    width: 200px;
+    width: 220px;
     margin: 10px;
     padding: 20px;
     color: #0f3375;
