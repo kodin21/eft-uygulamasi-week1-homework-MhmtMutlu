@@ -40,11 +40,11 @@ window.onload = function() {
     var minute = 1;
     var sec = 59;
     setInterval(function() {
-        timerCountdownDOM.innerHTML = "0" + minute + " : " + sec;
-        sec--;
         if (sec < 10) {
             sec = "0" + sec
         }
+        timerCountdownDOM.innerHTML = "0" + minute + " : " + sec;
+        sec--;
         if (sec == 0) {
             if (minute == 0 && sec == 0) {
                 window.location.reload()
