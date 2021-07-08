@@ -1,5 +1,6 @@
 // import { accounts } from "./example-other-file"
 
+// Account informations
 const accounts = [
     {
         iban: 'TR11 0000 1111 0000',
@@ -15,6 +16,7 @@ const accounts = [
     }
 ];
 
+// Created DOM values to take elements from HTML
 let accountsDOM = document.querySelector(".accounts")
 let inputMoneyDOM = document.querySelector("#money-input")
 let alertLabelDOM = document.querySelector(".alert-label")
@@ -22,6 +24,7 @@ let inputReceiverDOM = document.querySelector(".receiver-account")
 let sendButtonDOM = document.querySelector(".send-button")
 let timerCountdownDOM = document.querySelector(".timer-countdown")
 
+// Used forEach for accounts array to create cards for every account information
 accounts.forEach((acc, index) => {accountsDOM.innerHTML += `
     <div id=${index} class="card">
         <h2>Account</h2>
@@ -32,6 +35,7 @@ accounts.forEach((acc, index) => {accountsDOM.innerHTML += `
     </div>
 `})
 
+// Created a timer with setInterval to reload page after 2 minutes
 window.onload = function() {
     var minute = 1;
     var sec = 59;
@@ -51,9 +55,12 @@ window.onload = function() {
     }, 1000);
 }
 
+// Created DOM values which were created with forEach to add events
 let selectCardsDOM = document.querySelectorAll(".card")
 let selectButtonsDOM = document.querySelectorAll(".select-buttons")
+// An array which is holding selected buttons to reach details of selected account
 let selectedButtons = []
+// Used forEach to add click event for buttons which were clicked
 selectButtonsDOM.forEach(btn => btn.addEventListener("click", (e) => {
     selectCardsDOM[e.target.id].classList = "selected-card"
     selectedButtons.push(e.target.id)
@@ -64,15 +71,17 @@ selectButtonsDOM.forEach(btn => btn.addEventListener("click", (e) => {
     }
 }))
 
-let ibanRegex = /^TR\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}|TR\d{14}$/
+// Created a regex for IBAN to check input 
+const IBAN_REGEX = /^TR\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}|TR\d{14}$/
 inputReceiverDOM.addEventListener("input", (e) => {
-    if(!ibanRegex.test(e.target.value)) {
+    if(!IBAN_REGEX.test(e.target.value)) {
         inputMoneyDOM.disabled = true
     } else {
         inputMoneyDOM.disabled = false
     }
 })
 
+// Added input event to track input value of inputMoneyDOM
 inputMoneyDOM.addEventListener("input", (e) => {
     let selectedBankAccount = selectCardsDOM[selectedButtons[selectedButtons.length - 1]].id
     if (e.target.value) {
@@ -89,6 +98,7 @@ inputMoneyDOM.addEventListener("input", (e) => {
     }
 })
 
+// Added click event to check inputMoneyDOM's value and show alerts which depends on inputValueDOM
 sendButtonDOM.addEventListener("click", (e) => {
     if(inputMoneyDOM.value <= 500) {
         alertify.success('Money was send successfully!');
